@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 
-export default function Home() {
-  return (
-    <div className="text-2xl bg-amber-200 font-extrabold
-    ">
-      <h1>Hello world!</h1>
+const Page = async () => {
 
-      <Button variant={"destructive"}>Hello</Button>
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">Welcome to Vibe Bro</h1>
+      <Button className="mb-4">Click Me</Button>
     </div>
   );
-}
+};
+export default Page;
