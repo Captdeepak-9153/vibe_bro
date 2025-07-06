@@ -8,11 +8,15 @@ import { toast } from "sonner";
 const Page = () => {
   const trpc = useTRPC();
   const invoke = useMutation(trpc.invoke.mutationOptions({
-    onSuccess:() => {
+    onSuccess: () => {
       toast.success("Background job invoked successfully!");
+    },
+    onError: (error) => {
+      toast.error("Failed to invoke background job. Please try again.");
     }
   }));
-return (
+  // …rest of component
+};return (
    <div className="p-4 max-w-7xl mx-auto">
     <Button disabled={invoke.isPending} onClick={() => invoke.mutate({ text: "DEEPAK"})}>
       Invoke Background Job
