@@ -1,12 +1,18 @@
-import { Button } from "@/components/ui/button";
-
-const Page = async () => {
-
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Welcome to Vibe Bro</h1>
-      <Button className="mb-4">Click Me</Button>
-    </div>
+import { getQueryClient,trpc } from "@/trpc/server";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { Client } from "./client";
+import { Suspense } from "react";
+const Page =  async () => {
+ const queryClient= getQueryClient();
+  void queryClient.prefetchQuery(trpc.createAI.queryOptions({text:"DEEPAK PREFETCG"}));
+  
+return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Suspense fallback={<p>Loading.....</p>}>
+        <Client />
+      </Suspense>
+    </HydrationBoundary>
   );
 };
 export default Page;
+
